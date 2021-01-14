@@ -18,14 +18,31 @@ main,
   padding-right: 30px;
 }
 
+main {
+  margin-bottom: 80px;
+}
+
+a.btn,
 button,
 input[type="submit"] {
   width: 100%;
   display: block;
   padding: 17px 10px 12px 10px;
+  box-sizing: border-box;
+  background-color: #eee;
   border: none;
   font-weight: 600;
+  color: #000;
+  text-align: center;
+  text-decoration: none;
+  transition: color 0.1s;
   cursor: pointer;
+}
+
+a.btn:hover,
+button:hover,
+input[type=submit]:hover {
+  color: #006cff;
 }
 
 input[type="submit"][disabled] {
@@ -58,6 +75,11 @@ h1 {
   font-weight: 700;
   text-transform: uppercase;
   line-height: 1.2;
+}
+
+p {
+  margin: 0 0 20px 0;
+  line-height: 1.4;
 }
 
 /* Media Queries */

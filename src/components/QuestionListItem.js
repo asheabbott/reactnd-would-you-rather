@@ -14,10 +14,16 @@ class QuestionListItem extends Component {
 
     return (
       <li key={question.id}>
-        <img src={users[question.author].avatarURL} alt=''></img>
-        <p className='author'>{`${users[question.author].name} asks:`}</p>
-        <p>{`Would you rather ${question.optionOne.text} or ${question.optionTwo.text}?`}</p>
-        <Link to={`/questions/${question.id}`}>View quesiton</Link>
+        <div className='content'>
+          <div className='avatar'>
+            <img src={users[question.author].avatarURL} alt=''></img>
+          </div>
+          <div className='text'>
+            <p className='author'><span>{users[question.author].name}</span> asks:</p>
+            <p>{`Would you rather ${question.optionOne.text} or ${question.optionTwo.text}?`}</p>
+          </div>
+        </div>
+        <Link className='btn' to={`/questions/${question.id}`}>View question</Link>
       </li>
     );
   }

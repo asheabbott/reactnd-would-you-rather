@@ -1,7 +1,8 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import QuestionListItem from './QuestionListItem';
+import './QuestionList.css';
 
 class QuestionList extends Component {
   static propTypes = {
@@ -14,27 +15,50 @@ class QuestionList extends Component {
     answered: false,
   }
 
+  handleAnsweredToggle = event => {
+    this.setState({
+      answered: event.target.getAttribute('value'),
+    })
+
+    // TO DO: Questions toggle only works first time
+  }
+
   render() {
     const {users, questions, authUser} = this.props;
-    // const {answered} = this.state;
+    const {answered} = this.state;
 
     return (
-      <div>
+      <Fragment>
         <h1>
-          Unanswered Questions
+          <span 
+            className='answered-toggle false'
+            value={false}
+            onClick={this.handleAnsweredToggle}>
+              Unanswered Questions
+          </span> / <span
+            className='answered-toggle true'
+            value={true}
+            onClick={this.handleAnsweredToggle}>
+              Answered Questions
+          </span>
         </h1>
-        
-        {/* NEXT: Figure out how to pull in unanswered questions; may want to change below function to something like filter questions array by user question IDs or NOT user question IDs */}
 
-        <ul>
-          {Object.keys(users[authUser].answers).map(questionID => (
-            <QuestionListItem
-              key={questionID}
-              question={questions[questionID]}
-            />
-          ))}
+        <ul className='question-list'>
+          {answered === false
+            ? Object.keys(questions).filter(question => Object.keys(users[authUser].answers).includes(question)).map(questionID => (
+              <QuestionListItem
+                key={questionID}
+                question={questions[questionID]}
+              />
+            ))
+            : Object.keys(questions).filter(question => !Object.keys(users[authUser].answers).includes(question)).map(questionID => (
+              <QuestionListItem
+                key={questionID}
+                question={questions[questionID]}
+              />
+            ))}
         </ul>
-      </div>
+      </Fragment>
     );
   }
 }
