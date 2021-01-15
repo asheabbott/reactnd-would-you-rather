@@ -62,11 +62,11 @@ button.link:hover {
 }
 
 /* TO DO: Tab-only focus styles for interactive elements */
-*:focus,
+/* *:focus,
 *:active {
   border: 0;
   outline: 0;
-}
+} */
 
 h1 {
   margin: 0 0 40px 0;

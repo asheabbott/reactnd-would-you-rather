@@ -12,15 +12,13 @@ class QuestionList extends Component {
   }
 
   state = {
-    answered: false,
+    answered: 'false',
   }
 
   handleAnsweredToggle = event => {
     this.setState({
       answered: event.target.getAttribute('value'),
-    })
-
-    // TO DO: Questions toggle only works first time
+    });
   }
 
   render() {
@@ -29,32 +27,34 @@ class QuestionList extends Component {
 
     return (
       <Fragment>
-        <h1>
+        <h1 className='answered-toggle'>
           <span 
-            className='answered-toggle false'
-            value={false}
+            role='button'
+            value='false'
+            active={answered === 'false' ? 'active' : 'inactive'}
             onClick={this.handleAnsweredToggle}>
               Unanswered Questions
           </span> / <span
-            className='answered-toggle true'
-            value={true}
+            role='button'
+            value='true'
+            active={answered === 'true' ? 'active' : 'inactive'}
             onClick={this.handleAnsweredToggle}>
               Answered Questions
           </span>
         </h1>
 
         <ul className='question-list'>
-          {answered === false
-            ? Object.keys(questions).filter(question => Object.keys(users[authUser].answers).includes(question)).map(questionID => (
+          {answered === 'false'
+            ? Object.values(questions).sort((a, b) => b.timestamp - a.timestamp).filter(question => Object.keys(users[authUser].answers).includes(question.id)).map(question => (
               <QuestionListItem
-                key={questionID}
-                question={questions[questionID]}
+                key={question.id}
+                question={question}
               />
             ))
-            : Object.keys(questions).filter(question => !Object.keys(users[authUser].answers).includes(question)).map(questionID => (
+            : Object.values(questions).sort((a, b) => b.timestamp - a.timestamp).filter(question => !Object.keys(users[authUser].answers).includes(question.id)).map(question => (
               <QuestionListItem
-                key={questionID}
-                question={questions[questionID]}
+                key={question.id}
+                question={question}
               />
             ))}
         </ul>

@@ -1,5 +1,19 @@
-.answered-toggle {
+h1.answered-toggle {
+  color: #939597;
+}
+
+.answered-toggle span {
+  transition: color 0.1s;
   cursor: pointer;
+}
+
+.answered-toggle span[active="active"] {
+  color: #fff;
+}
+
+.answered-toggle span:hover,
+.answered-toggle span[active="active"]:hover {
+  color: #006cff;
 }
 
 .question-list {
