@@ -7,6 +7,7 @@ import SignIn from './SignIn';
 import Header from './Header';
 import QuestionList from './QuestionList';
 import Question from './Question';
+import 'focus-visible/dist/focus-visible.js';
 import './App.css';
 
 class App extends Component {

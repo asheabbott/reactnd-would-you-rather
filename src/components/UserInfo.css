@@ -34,7 +34,7 @@
 
 /* Media Queries */
 
-@media (min-width: 768px) {
+@media (min-width: 576px) {
   .user-info .greeting,
   .user-info .profile-photo {
     margin: 0 20px 0 0;

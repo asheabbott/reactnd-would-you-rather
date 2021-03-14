@@ -13,7 +13,7 @@ class QuestionListItem extends Component {
     const {users, question} = this.props;
 
     return (
-      <li key={question.id}>
+      <li key={question.id} className='question-box'>
         <div className='content'>
           <div className='avatar'>
             <img src={users[question.author].avatarURL} alt=''></img>

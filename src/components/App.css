@@ -10,6 +10,7 @@ body {
   font-size: 18px;
   color: #eee;
   line-height: 1.2;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 main,
@@ -57,17 +58,6 @@ button.link {
   border: none;
 }
 
-button.link:hover {
-  text-decoration: underline;
-}
-
-/* TO DO: Tab-only focus styles for interactive elements */
-/* *:focus,
-*:active {
-  border: 0;
-  outline: 0;
-} */
-
 h1 {
   margin: 0 0 40px 0;
   font-family: "Roboto Condensed", sans-serif;
@@ -80,6 +70,17 @@ h1 {
 p {
   margin: 0 0 20px 0;
   line-height: 1.4;
+}
+
+/* Focus */
+
+.js-focus-visible :focus:not(.focus-visible) {
+  outline: none;
+}
+
+.js-focus-visible .focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px #006cff;
 }
 
 /* Media Queries */

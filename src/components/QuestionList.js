@@ -1,4 +1,4 @@
-import React, {Component, Fragment} from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import QuestionListItem from './QuestionListItem';
@@ -26,7 +26,7 @@ class QuestionList extends Component {
     const {answered} = this.state;
 
     return (
-      <Fragment>
+      <section className='question-list'>
         <h1 className='answered-toggle'>
           <span 
             role='button'
@@ -43,7 +43,7 @@ class QuestionList extends Component {
           </span>
         </h1>
 
-        <ul className='question-list'>
+        <ul className='questions'>
           {answered === 'false'
             ? Object.values(questions).sort((a, b) => b.timestamp - a.timestamp).filter(question => Object.keys(users[authUser].answers).includes(question.id)).map(question => (
               <QuestionListItem
@@ -58,7 +58,7 @@ class QuestionList extends Component {
               />
             ))}
         </ul>
-      </Fragment>
+      </section>
     );
   }
 }

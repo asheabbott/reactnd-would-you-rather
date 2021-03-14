@@ -2,8 +2,6 @@ import React, {Component, Fragment} from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faBars, faTimes} from '@fortawesome/free-solid-svg-icons';
 import './LogoNav.css';
 
 class LogoNav extends Component {
@@ -47,7 +45,7 @@ class LogoNav extends Component {
   handleHamburger = event => {
     const {hamburgerMenu} = this.state;
 
-    event.target.closest('.hamburger').classList.toggle('open');
+    event.target.closest('.hamburger').classList.toggle('is-active');
 
     this.setState({
       hamburgerMenu: !hamburgerMenu,
@@ -66,9 +64,11 @@ class LogoNav extends Component {
 
         {authUser !== '' && (
           <Fragment>
-            <div className='hamburger' onClick={this.handleHamburger}>
-              {hamburgerMenu === false ? <FontAwesomeIcon icon={faBars} /> : <FontAwesomeIcon icon={faTimes} />}
-            </div>
+            <button className='hamburger' aria-label='Main Navigation' aria-controls='navigation' aria-expanded={hamburgerMenu === true ? true : false} onClick={this.handleHamburger}>
+              <span className='hamburger-box'>
+                <span className='hamburger-inner'></span>
+              </span>
+            </button> 
             <nav className='main-nav'>
               <Link to='/'>Dashboard</Link>
               <Link to='/add'>New Question</Link>

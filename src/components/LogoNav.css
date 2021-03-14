@@ -11,17 +11,103 @@
   padding: 20px 0;
 }
 
+/* Hamburger based on https://github.com/jonsuh/hamburgers */
+
 .hamburger {
+  width: auto;
   display: flex;
   align-items: center;
-  margin-top: -3px;
   margin-left: auto;
+  padding: 0;
+  background: none;
+  border: none;
+  outline: inherit;
+  font: inherit;
+	color: inherit;
   cursor: pointer;
 }
 
-.hamburger svg {
-  width: 30px !important;
-  height: 30px;
+.hamburger-box {
+  width: 35px;
+  height: 32px;
+  display: inline-block;
+  position: relative; 
+}
+
+.hamburger-inner {
+  display: block;
+  top: auto;
+  bottom: 0;
+  transition: background-color 0.3s ease;
+  transition-duration: 0.13s;
+  transition-delay: 0.13s;
+  transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+}
+
+.hamburger-inner,
+.hamburger-inner::before,
+.hamburger-inner::after {
+  width: 35px;
+  height: 6px;
+  background-color: #eee;
+  border-radius: 1px;
+  position: absolute;
+  transition-property: transform;
+  transition-duration: 0.15s;
+  transition-timing-function: ease; 
+}
+
+.hamburger:hover .hamburger-inner,
+.hamburger:hover .hamburger-inner::before,
+.hamburger:hover .hamburger-inner::after {
+  background-color: #006cff; 
+}
+
+.hamburger-inner::before, 
+.hamburger-inner::after {
+  content: "";
+  display: block; 
+}
+
+.hamburger-inner::before {
+  top: -13px; 
+  transition: top 0.12s 0.2s cubic-bezier(0.33333, 0.66667, 0.66667, 1), transform 0.13s cubic-bezier(0.55, 0.055, 0.675, 0.19), background-color 0.3s ease;
+}
+
+.hamburger-inner::after {
+  top: -26px;
+  bottom: -13px;
+  transition: top 0.2s 0.2s cubic-bezier(0.33333, 0.66667, 0.66667, 1), opacity 0.1s linear, background-color 0.3s ease;
+}
+
+.hamburger.is-active .hamburger-inner,
+.hamburger.is-active .hamburger-inner::before,
+.hamburger.is-active .hamburger-inner::after {
+  background-color: #eee; 
+}
+
+.hamburger.is-active:hover .hamburger-inner,
+.hamburger.is-active:hover .hamburger-inner::before,
+.hamburger.is-active:hover .hamburger-inner::after {
+  background-color: #006cff; 
+}
+
+.hamburger.is-active .hamburger-inner {
+  transform: translate3d(0, -10px, 0) rotate(-45deg);
+  transition-delay: 0.22s;
+  transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1); 
+}
+
+.hamburger.is-active .hamburger-inner::before {
+  top: 0;
+  transform: rotate(-90deg);
+  transition: top 0.1s 0.16s cubic-bezier(0.33333, 0, 0.66667, 0.33333), transform 0.13s 0.25s cubic-bezier(0.215, 0.61, 0.355, 1); 
+}
+
+.hamburger.is-active .hamburger-inner::after {
+  top: 0;
+  opacity: 0;
+  transition: top 0.2s cubic-bezier(0.33333, 0, 0.66667, 0.33333), opacity 0.1s 0.22s linear; 
 }
 
 .main-nav {
@@ -30,9 +116,10 @@
   margin: 0;
   overflow: hidden;
   transition: all 0.5s ease;
+  text-align: right;
 }
 
-.hamburger.open ~ .main-nav {
+.hamburger.is-active ~ .main-nav {
   height: 123px;
   margin: 20px 0;
 }
@@ -43,7 +130,7 @@
   padding: 10px 0;
   font-family: "Roboto Condensed", sans-serif;
   font-weight: 700;
-  color: #ccc;
+  color: #eee;
   text-transform: uppercase;
   text-decoration: none;
   transition: all 0.3s ease;
@@ -54,18 +141,27 @@
 }
 
 .main-nav a:hover {
-  color: #fff;
+  color: #006cff;
 }
 
 /* Media Queries */
 
-@media (min-width: 768px) {
+@media (min-width: 992px) {
   .logo {
     width: auto;
   }
 
   .hamburger {
     display: none;
+  }
+
+  .main-nav {
+    margin: 0 0 0 auto;
+  }
+
+  .hamburger.is-active ~ .main-nav {
+    height: auto;
+    margin: 0 0 0 auto;
   }
 
   .main-nav {

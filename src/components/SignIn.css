@@ -26,20 +26,13 @@
   position: relative;
 }
 
-.sign-in .user-select:after {
-  content: "\f078";
-  position: absolute;
-  top: 50%;
-  right: 0;
-  transform: translateY(-50%);
-  font-family: "Font Awesome 5 Free";
-  font-weight: 900;
-  color: #eee;
-}
-
 .sign-in select {
   width: 100%;
   background-color: #131313;
+  background-image: url("../images/icon-arrow-down.svg");
+  background-size: 15px 9px;
+  background-position: right center;
+  background-repeat: no-repeat;
   color: #eee;
   border: none;
   -moz-appearance: none;
