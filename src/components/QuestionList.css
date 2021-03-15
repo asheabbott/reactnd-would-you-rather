@@ -94,7 +94,7 @@ h1.answered-toggle {
     margin: 0 0 0 15px;
   }
 
-  .question-box .text p:last-of-type {
+  .question-box .text p:last-of-type:not(.author) {
     margin-bottom: 0;
   }
 }

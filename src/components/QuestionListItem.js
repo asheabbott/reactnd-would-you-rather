@@ -20,7 +20,7 @@ class QuestionListItem extends Component {
           </div>
           <div className='text'>
             <p className='author'><span>{users[question.author].name}</span> asks:</p>
-            <p>{`Would you rather ${question.optionOne.text} or ${question.optionTwo.text}?`}</p>
+            <p>Would you rather {question.optionOne.text} or {question.optionTwo.text}?</p>
           </div>
         </div>
         <Link className='btn' to={`/questions/${question.id}`}>View question</Link>

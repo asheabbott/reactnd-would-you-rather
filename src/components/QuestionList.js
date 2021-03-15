@@ -44,7 +44,7 @@ class QuestionList extends Component {
         </h1>
 
         <ul className='questions'>
-          {answered === 'false'
+          {answered === 'true'
             ? Object.values(questions).sort((a, b) => b.timestamp - a.timestamp).filter(question => Object.keys(users[authUser].answers).includes(question.id)).map(question => (
               <QuestionListItem
                 key={question.id}

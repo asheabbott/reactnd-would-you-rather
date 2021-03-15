@@ -15,7 +15,7 @@ class UserInfo extends Component {
 
     return (
       <div className='user-info container'>
-        <div className='greeting'>{`Hello, ${users[authUser].name}.`}</div>
+        <div className='greeting'>Hello, {users[authUser].name}.</div>
         <div className='profile-photo' style={{backgroundImage: `url(${users[authUser].avatarURL})`}}></div>
         <button className='link' onClick={signOut}>Sign Out</button>
       </div>

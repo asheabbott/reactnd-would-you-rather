@@ -10,15 +10,31 @@ class Question extends Component {
     authUser: PropTypes.string.isRequired,
   }
 
+  formSubmit = (event) => {
+
+  }
+
   render() {
     const {users, questions, authUser} = this.props;
     const questionID = this.props.match.params.id;
     const question = questions[questionID];
 
-    const statusText = !Object.keys(users[authUser].answers).includes(question.id) ? 'You’ve already answered this question.' : 'You haven\'t answered this question yet.';
+    const statusText = Object.keys(users[authUser].answers).includes(question.id) ? 'You’ve already answered this question.' : 'You haven\'t answered this question yet.';
+
+    const optionOneVotes = questions[questionID]['optionOne']['votes'].length;
+    const optionTwoVotes = questions[questionID]['optionTwo']['votes'].length;
+    const totalVotes = optionOneVotes + optionTwoVotes;
+    const optionOnePercentage = (optionOneVotes / totalVotes) * 100;
+    const optionTwoPercentage = (optionTwoVotes / totalVotes) * 100;
+
+    const userAnswer = users[authUser].answers[questionID];
+    const userAnswerIndicator = '(This is your answer.)';
+    const questionStatus = userAnswer ? 'answered' : 'unanswered';
+
+    console.log(userAnswer);
 
     return (
-      <section className='question'>
+      <section className={`question ${questionStatus}`}>
         <div className='headings'>
           <h1 className='page-title'>Question</h1>
           <h2 className='question-status-text'>{statusText}</h2>
@@ -30,22 +46,67 @@ class Question extends Component {
             </div>
             <div className='text'>
               <p className='author'><span>{users[question.author].name}</span> asks:</p>
-              {!Object.keys(users[authUser].answers).includes(question.id) 
+              {Object.keys(users[authUser].answers).includes(question.id) 
                 ? <div className='question-details'>
-                    <p className='question-text'>{`Would you rather ${question.optionOne.text} or ${question.optionTwo.text}?`}</p>
-                    {/* vv TO DO: Get question answers; calculate % of answer one; get auth user answer vv */}
-                    <p className='answer-stats'>{`Would you rather ${question.optionOne.text} or ${question.optionTwo.text}?`}</p>
-                    {/* vv TO DO: Get question answers; calculate % of answer two; get auth user answer vv */}
-                    <p className='answer-stats'>{`Would you rather ${question.optionOne.text} or ${question.optionTwo.text}?`}</p>
+                    <p className='question-text'>Would you rather {question.optionOne.text} or {question.optionTwo.text}?</p>
+                    <div className='answer-stats'>
+                      <p>{optionOnePercentage}% of people — {optionOneVotes} out of {totalVotes} answers — would rather <strong>{question.optionOne.text}</strong>.</p>
+                      {userAnswer === 'optionOne'
+                        ? <p className='user-answer-indicator'>{userAnswerIndicator}</p>
+                        : null
+                      }
+                    </div>
+                    <div className='answer-stats'>
+                      <p>{optionTwoPercentage}% of people — {optionTwoVotes} out of {totalVotes} answers — would rather <strong>{question.optionTwo.text}</strong>.</p>
+                      {userAnswer === 'optionTwo'
+                        ? <p className='user-answer-indicator'>{userAnswerIndicator}</p>
+                        : null
+                      }
+                    </div>
                   </div>
                 : <div className='question-details'>
                     <p>Would you rather</p>
                     {/* TO DO: Set up controlled radio button; handle input */}
+                    <form>
+                      <div className='radio'>
+                        <label>
+                          <input
+                            type='radio'
+                            value='Male'
+                            checked=''
+                            onChange=''
+                          />
+                          Male
+                        </label>
+                      </div>
+                      <div className='radio'>
+                        <label>
+                          <input
+                            type='radio'
+                            value='Female'
+                            checked=''
+                            onChange=''
+                          />
+                          Female
+                        </label>
+                      </div>
+                      <div className='radio'>
+                        <label>
+                          <input
+                            type='radio'
+                            value='Other'
+                            checked=''
+                            onChange=''
+                          />
+                          Other
+                        </label>
+                      </div>
+                    </form>
                   </div>
               }
             </div>
           </div>
-          {!Object.keys(users[authUser].answers).includes(question.id) 
+          {Object.keys(users[authUser].answers).includes(question.id) 
             ? null
             : <button>View question</button>
           }
