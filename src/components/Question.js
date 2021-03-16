@@ -1,6 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
+import {handleAddAnswer} from '../actions/questions';
 import './Question.css';
 
 class Question extends Component {
@@ -10,8 +11,30 @@ class Question extends Component {
     authUser: PropTypes.string.isRequired,
   }
 
-  formSubmit = (event) => {
+  state = {
+    answer: 'optionOne',
+  }
 
+  handleChange = (event) => {
+    this.setState({
+      answer: event.target.value
+    });
+  }
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+
+    const {authUser} = this.props;
+    const questionID = this.props.match.params.id;
+    const answer = this.state.answer;
+
+    // console.log(authUser);
+    // console.log(questionID);
+    // console.log(answer);
+
+    this.props.dispatch(handleAddAnswer(authUser, questionID, answer));
+
+    // console.log(this.state.answer);
   }
 
   render() {
@@ -30,8 +53,6 @@ class Question extends Component {
     const userAnswer = users[authUser].answers[questionID];
     const userAnswerIndicator = '(This is your answer.)';
     const questionStatus = userAnswer ? 'answered' : 'unanswered';
-
-    console.log(userAnswer);
 
     return (
       <section className={`question ${questionStatus}`}>
@@ -66,39 +87,30 @@ class Question extends Component {
                   </div>
                 : <div className='question-details'>
                     <p>Would you rather</p>
-                    {/* TO DO: Set up controlled radio button; handle input */}
-                    <form>
+                    {/* TO DO: Finish answer functionality (users state, load question as answered); styles */}
+                    <form id='answerInput' onSubmit={this.handleSubmit}>
                       <div className='radio'>
                         <label>
                           <input
                             type='radio'
-                            value='Male'
-                            checked=''
-                            onChange=''
+                            name='answers'
+                            value='optionOne'
+                            checked={this.state.answer === 'optionOne'}
+                            onChange={this.handleChange}
                           />
-                          Male
+                          {question.optionOne.text} or
                         </label>
                       </div>
                       <div className='radio'>
                         <label>
                           <input
                             type='radio'
-                            value='Female'
-                            checked=''
-                            onChange=''
+                            name='answers'
+                            value='optionTwo'
+                            checked={this.state.answer === 'optionTwo'}
+                            onChange={this.handleChange}
                           />
-                          Female
-                        </label>
-                      </div>
-                      <div className='radio'>
-                        <label>
-                          <input
-                            type='radio'
-                            value='Other'
-                            checked=''
-                            onChange=''
-                          />
-                          Other
+                          {question.optionTwo.text}
                         </label>
                       </div>
                     </form>
@@ -108,7 +120,7 @@ class Question extends Component {
           </div>
           {Object.keys(users[authUser].answers).includes(question.id) 
             ? null
-            : <button>View question</button>
+            : <button type='submit' form='answerInput'>View question</button>
           }
         </div>
       </section>
