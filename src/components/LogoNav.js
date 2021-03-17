@@ -59,7 +59,9 @@ class LogoNav extends Component {
     return (
       <div className='logo-nav container'>
         <div className='logo'>
-          Would You Rather?
+          <Link to='/'>
+            Would You Rather?
+          </Link>
         </div>
 
         {authUser !== '' && (

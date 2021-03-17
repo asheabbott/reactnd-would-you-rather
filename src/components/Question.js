@@ -1,7 +1,8 @@
-import React, {Component, Fragment} from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import {handleAddAnswer} from '../actions/questions';
+import NotFound from './NotFound';
+import {handleAddAnswer} from '../actions/shared';
 import './Question.css';
 
 class Question extends Component {
@@ -28,19 +29,17 @@ class Question extends Component {
     const questionID = this.props.match.params.id;
     const answer = this.state.answer;
 
-    // console.log(authUser);
-    // console.log(questionID);
-    // console.log(answer);
-
     this.props.dispatch(handleAddAnswer(authUser, questionID, answer));
-
-    // console.log(this.state.answer);
   }
 
   render() {
     const {users, questions, authUser} = this.props;
     const questionID = this.props.match.params.id;
     const question = questions[questionID];
+
+    if (!Object.keys(questions).includes(questionID)) {
+      return <NotFound />;
+    }
 
     const statusText = Object.keys(users[authUser].answers).includes(question.id) ? 'You’ve already answered this question.' : 'You haven\'t answered this question yet.';
 
@@ -71,14 +70,14 @@ class Question extends Component {
                 ? <div className='question-details'>
                     <p className='question-text'>Would you rather {question.optionOne.text} or {question.optionTwo.text}?</p>
                     <div className='answer-stats'>
-                      <p>{optionOnePercentage}% of people — {optionOneVotes} out of {totalVotes} answers — would rather <strong>{question.optionOne.text}</strong>.</p>
+                      <p><strong>{optionOnePercentage.toFixed(0)}%</strong> of people — {optionOneVotes} out of {totalVotes} answers — would rather <strong>{question.optionOne.text}</strong>.</p>
                       {userAnswer === 'optionOne'
                         ? <p className='user-answer-indicator'>{userAnswerIndicator}</p>
                         : null
                       }
                     </div>
                     <div className='answer-stats'>
-                      <p>{optionTwoPercentage}% of people — {optionTwoVotes} out of {totalVotes} answers — would rather <strong>{question.optionTwo.text}</strong>.</p>
+                      <p><strong>{optionTwoPercentage.toFixed(0)}%</strong> of people — {optionTwoVotes} out of {totalVotes} answers — would rather <strong>{question.optionTwo.text}</strong>.</p>
                       {userAnswer === 'optionTwo'
                         ? <p className='user-answer-indicator'>{userAnswerIndicator}</p>
                         : null
@@ -86,8 +85,8 @@ class Question extends Component {
                     </div>
                   </div>
                 : <div className='question-details'>
-                    <p>Would you rather</p>
-                    {/* TO DO: Finish answer functionality (users state, load question as answered); styles */}
+                    <p className='question-intro'>Would you rather</p>
+                    {/* TO DO: Finish styles */}
                     <form id='answerInput' onSubmit={this.handleSubmit}>
                       <div className='radio'>
                         <label>
@@ -120,7 +119,7 @@ class Question extends Component {
           </div>
           {Object.keys(users[authUser].answers).includes(question.id) 
             ? null
-            : <button type='submit' form='answerInput'>View question</button>
+            : <button type='submit' form='answerInput'>Submit answer</button>
           }
         </div>
       </section>

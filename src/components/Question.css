@@ -28,6 +28,22 @@
   line-height: 1.2;
 }
 
+.question.unanswered p {
+  margin-bottom: 20px;
+}
+
+.question.unanswered form .radio {
+  margin-bottom: 10px;
+}
+
+.question.unanswered form .radio:last-of-type {
+  margin-bottom: 0;
+}
+
+.question.unanswered form .radio input {
+  margin-right: 15px;
+}
+
 .question.answered .author,
 .question.answered .answer-stats p:last-of-type {
   margin: 0;
@@ -77,7 +93,7 @@
     margin: 0 0 0 15px;
   }
 
-  .question .question-box .text p:last-of-type:not(.author) {
+  .question .question-box .text p:last-of-type:not(.author):not(.question-intro) {
     margin-bottom: 0;
   }
 }

@@ -11,6 +11,15 @@
   padding: 20px 0;
 }
 
+.logo a {
+  color: #eee;
+  text-decoration: none;
+}
+
+.logo a:hover {
+  color: #eee !important;
+}
+
 /* Hamburger based on https://github.com/jonsuh/hamburgers */
 
 .hamburger {

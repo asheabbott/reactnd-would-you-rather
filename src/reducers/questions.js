@@ -1,23 +1,14 @@
 import {
-//   ADD_TODO,
-//   REMOVE_TODO,
-//   TOGGLE_TODO,
+  RECEIVE_DATA,
   ADD_ANSWER,
-} from '../actions/questions';
-
-import {RECEIVE_DATA} from '../actions/shared';
+} from '../actions/shared';
 
 // Reducer
 function questions(state = [], action) {
   switch(action.type) {
-    // case ADD_TODO: 
-    //   return state.concat([action.todo]);
-    // case REMOVE_TODO:
-    //   return state.filter(todo => todo.id !== action.id);
-    // case TOGGLE_TODO:
-    //   return state.map(todo => todo.id !== action.id ? todo : Object.assign({}, todo, {complete: !todo.complete}));
+    case RECEIVE_DATA:
+      return action.questions;
     case ADD_ANSWER:
-      // return state.concat([action.answer]);
       const {authedUser, qid, answer} = action;
       
       return {
@@ -30,8 +21,6 @@ function questions(state = [], action) {
           },
         },
       };
-    case RECEIVE_DATA:
-      return action.questions;
     default:
       return state;
   }

@@ -1,12 +1,15 @@
 import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
-import {Route} from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {handleInitialData} from '../actions/shared';
 import SignIn from './SignIn';
 import Header from './Header';
 import QuestionList from './QuestionList';
 import Question from './Question';
+import NotFound from './NotFound';
+import AddQuestion from './AddQuestion';
+import Leaderboard from './Leaderboard';
 import 'focus-visible/dist/focus-visible.js';
 import './App.css';
 
@@ -28,7 +31,12 @@ class App extends Component {
     if (loading === true) {
       return (
         <main>
-          <p>Loading</p>
+          <div className='loading'>
+            <div className='loading-inner'>
+              <div className='icon'></div>
+              <p>Loading</p>
+            </div>
+          </div>
         </main>
       );
     }
@@ -40,8 +48,13 @@ class App extends Component {
           {authUser === ''
             ? <SignIn />
             : <Fragment>
-                <Route exact path='/' component={QuestionList} />
-                <Route path='/questions/:id' component={Question} />
+                <Switch>
+                  <Route exact path='/' component={QuestionList} />
+                  <Route exact path='/questions/:id' component={Question} />
+                  <Route exact path='/add' component={AddQuestion} />
+                  <Route exact path='/leaderboard' component={Leaderboard} />
+                  <Route component={NotFound} />
+                </Switch>
               </Fragment>}
         </main>
       </Fragment>
