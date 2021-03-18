@@ -86,7 +86,6 @@ class Question extends Component {
                   </div>
                 : <div className='question-details'>
                     <p className='question-intro'>Would you rather</p>
-                    {/* TO DO: Finish styles */}
                     <form id='answerInput' onSubmit={this.handleSubmit}>
                       <div className='radio'>
                         <label>
