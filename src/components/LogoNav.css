@@ -164,10 +164,6 @@
     display: none;
   }
 
-  .main-nav {
-    margin: 0 0 0 auto;
-  }
-
   .hamburger.is-active ~ .main-nav {
     height: auto;
     margin: 0 0 0 auto;

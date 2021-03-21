@@ -33,7 +33,7 @@ class Leaderboard extends Component {
                     </div>
                   </div>
                   <div className='avatar'>
-                    <div className='avatarImg' style={{backgroundImage: `url(${avatarURL})`}}></div>
+                    <div className='avatar-img' style={{backgroundImage: `url(${avatarURL})`}}></div>
                   </div>
                   <div className='details'>
                     <h2 className='name'>{name}</h2>

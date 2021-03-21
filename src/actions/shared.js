@@ -7,7 +7,7 @@ export const ADD_ANSWER = 'ADD_ANSWER';
 
 // Action Creator
 function receiveData(users, questions) {
-  //Action Object
+  // Action Object
   return {
     type: RECEIVE_DATA,
     users,

@@ -41,7 +41,7 @@ class AddQuestion extends Component {
       <section className='add-question'>
         <div className='headings'>
           <h1 className='page-title'>Ask a Question</h1>
-          <h2>Please enter the answer options for your question and click the submit button.</h2>
+          <h2 className='instructions'>Please enter the answer options for your question and click the submit button.</h2>
         </div>
         <div className='question-box'>
           <div className='content'>
@@ -65,11 +65,7 @@ class AddQuestion extends Component {
             </div>
           </form>
           </div>
-          <button 
-            type='submit' 
-            form='questionInput'>
-              Submit question
-          </button>
+          <button type='submit' form='questionInput'>Submit question</button>
         </div>
       </section>
     );

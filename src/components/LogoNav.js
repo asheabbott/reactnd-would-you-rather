@@ -52,6 +52,18 @@ class LogoNav extends Component {
     });
   }
 
+  handleHamburgerLink = () => {
+    const {hamburgerMenu} = this.state;
+
+    if (hamburgerMenu === true) {
+      document.querySelector('.hamburger').classList.remove('is-active');
+
+      this.setState({
+        hamburgerMenu: false,
+      });
+    }
+  }
+
   render() {
     const {authUser} = this.props;
     const {hamburgerMenu} = this.state;
@@ -72,9 +84,9 @@ class LogoNav extends Component {
               </span>
             </button> 
             <nav className='main-nav'>
-              <Link to='/'>Dashboard</Link>
-              <Link to='/add'>New Question</Link>
-              <Link to='/leaderboard'>Leaderboard</Link>
+              <Link to='/' onClick={this.handleHamburgerLink}>Dashboard</Link>
+              <Link to='/add' onClick={this.handleHamburgerLink}>New Question</Link>
+              <Link to='/leaderboard' onClick={this.handleHamburgerLink}>Leaderboard</Link>
             </nav>
           </Fragment>
         )}

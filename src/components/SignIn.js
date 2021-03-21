@@ -37,7 +37,8 @@ class SignIn extends Component {
         <h1>Sign In</h1>
         <form onSubmit={this.handleSubmit}>
           <div className='user-list'>
-            <div className='avatar' style={{backgroundImage: selected !== 'placeholder' ? `url(${users[selected].avatarURL})` : 'url(/images/avatar-placeholder.jpg)'}}>
+            <div className='avatar'>
+              <div className='avatar-img' style={{backgroundImage: selected !== 'placeholder' ? `url(${users[selected].avatarURL})` : 'url(/images/avatar-placeholder.svg)'}}></div>
             </div>
             <div className='user-select'>
               <select defaultValue='placeholder' value={this.state.value} onChange={this.handleChange}>

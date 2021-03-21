@@ -9,10 +9,6 @@
   padding: 0;
 }
 
-.add-question .question-box .content {
-  margin: 20px 20px 30px 20px;
-}
-
 .add-question .headings {
   display: flex;
   flex-direction: column;
@@ -23,13 +19,18 @@
   margin: 0 40px 10px 0;
 }
 
-.add-question h2 {
+.add-question .instructions {
   margin: 0 0 40px 0;
   font-family: "Montserrat", sans-serif;
   font-weight: 500;
   font-size: 18px;
   text-transform: none;
   line-height: 1.2;
+}
+
+.add-question .question-box .content {
+  display: block;
+  margin: 28px 30px 30px 30px;
 }
 
 .add-question input[type="text"] {
@@ -73,7 +74,7 @@
     margin: 0 40px 0 0;
   }
   
-  .add-question h2 {
+  .add-question .instructions {
     margin: 0;
   }
 }

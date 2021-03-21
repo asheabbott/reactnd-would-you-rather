@@ -56,7 +56,8 @@ class QuestionList extends Component {
                 key={question.id}
                 question={question}
               />
-            ))}
+            ))
+          }
         </ul>
       </section>
     );

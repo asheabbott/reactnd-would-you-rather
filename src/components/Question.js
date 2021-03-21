@@ -60,31 +60,41 @@ class Question extends Component {
           <h2 className='question-status-text'>{statusText}</h2>
         </div>
         <div className='question-box'>
-          <div className='content'>
-            <div className='avatar'>
-              <div className='avatar-img' style={{backgroundImage: `url(${users[question.author].avatarURL})`}}></div>
-            </div>
-            <div className='text'>
-              <p className='author'><span>{users[question.author].name}</span> asks:</p>
-              {Object.keys(users[authUser].answers).includes(question.id) 
-                ? <div className='question-details'>
-                    <p className='question-text'>Would you rather {question.optionOne.text} or {question.optionTwo.text}?</p>
-                    <div className='answer-stats'>
-                      <p><strong>{optionOnePercentage.toFixed(0)}%</strong> of people — {optionOneVotes} out of {totalVotes} answers — would rather <strong>{question.optionOne.text}</strong>.</p>
-                      {userAnswer === 'optionOne'
-                        ? <p className='user-answer-indicator'>{userAnswerIndicator}</p>
-                        : null
-                      }
-                    </div>
-                    <div className='answer-stats'>
-                      <p><strong>{optionTwoPercentage.toFixed(0)}%</strong> of people — {optionTwoVotes} out of {totalVotes} answers — would rather <strong>{question.optionTwo.text}</strong>.</p>
-                      {userAnswer === 'optionTwo'
-                        ? <p className='user-answer-indicator'>{userAnswerIndicator}</p>
-                        : null
-                      }
-                    </div>
+          {Object.keys(users[authUser].answers).includes(question.id) 
+            ? <div className='content'>
+                <div className='question-intro'>
+                  <div className='avatar'>
+                    <div className='avatar-img' style={{backgroundImage: `url(${users[question.author].avatarURL})`}}></div>
                   </div>
-                : <div className='question-details'>
+                  <div className='text'>
+                    <p className='author'><span>{users[question.author].name}</span> asks:</p>
+                    <p className='question-text'>Would you rather {question.optionOne.text} or {question.optionTwo.text}?</p>
+                  </div>
+                </div>             
+                <div className='question-details'>
+                  <div className='answer-stats'>
+                    <p><strong>{optionOnePercentage.toFixed(0)}%</strong> of people — {optionOneVotes} out of {totalVotes} answers — would rather <strong>{question.optionOne.text}</strong>.</p>
+                    {userAnswer === 'optionOne'
+                      ? <p className='user-answer-indicator'>{userAnswerIndicator}</p>
+                      : null
+                    }
+                  </div>
+                  <div className='answer-stats'>
+                    <p><strong>{optionTwoPercentage.toFixed(0)}%</strong> of people — {optionTwoVotes} out of {totalVotes} answers — would rather <strong>{question.optionTwo.text}</strong>.</p>
+                    {userAnswer === 'optionTwo'
+                      ? <p className='user-answer-indicator'>{userAnswerIndicator}</p>
+                      : null
+                    }
+                  </div>
+                </div>
+              </div>
+            : <div className='content'>
+                <div className='avatar'>
+                  <div className='avatar-img' style={{backgroundImage: `url(${users[question.author].avatarURL})`}}></div>
+                </div>
+                <div className='text'>
+                  <p className='author'><span>{users[question.author].name}</span> asks:</p>
+                  <div className='question-details'>
                     <p className='question-intro'>Would you rather</p>
                     <form id='answerInput' onSubmit={this.handleSubmit}>
                       <div className='radio'>
@@ -113,9 +123,9 @@ class Question extends Component {
                       </div>
                     </form>
                   </div>
-              }
-            </div>
-          </div>
+                </div>
+              </div>
+          }
           {Object.keys(users[authUser].answers).includes(question.id) 
             ? null
             : <button type='submit' form='answerInput'>Submit answer</button>
