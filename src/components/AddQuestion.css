@@ -36,10 +36,22 @@
   width: calc(100% - 40px);
   margin: 0 5px 20px 0;
   padding: 10px 0;
-  /* appearance: none; */
   background-color: transparent;
   border: none;
   border-bottom: 2px solid #eee;
+  color: #eee;
+}
+
+.add-question input[type="text"]::placeholder {
+  color: #939597;
+}
+      
+.add-question input[type="text"]:-ms-input-placeholder {
+  color: #939597;
+}
+      
+.add-question input[type="text"]::-ms-input-placeholder {
+  color: #939597;
 }
 
 .js-focus-visible .add-question input[type="text"].focus-visible {

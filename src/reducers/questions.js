@@ -1,5 +1,6 @@
 import {
   RECEIVE_DATA,
+  ADD_QUESTION,
   ADD_ANSWER,
 } from '../actions/shared';
 
@@ -8,6 +9,14 @@ function questions(state = [], action) {
   switch(action.type) {
     case RECEIVE_DATA:
       return action.questions;
+    case ADD_QUESTION:
+      const question = action.question;
+      const id = question.id;
+
+      return {
+        ...state,
+        [id]: question,
+      };
     case ADD_ANSWER:
       const {authedUser, qid, answer} = action;
       

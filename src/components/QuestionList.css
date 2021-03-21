@@ -33,23 +33,46 @@ h1.answered-toggle {
 }
 
 .question-box .avatar {
-  margin: 20px 20px 30px 20px;
+  position: relative;
+  /* margin: 20px 20px 30px 20px; */
 }
 
-.question-box .avatar img {
+.question-box .avatar:after {
+  content: "";
+  display: block;
+  padding-bottom: 100%;
+}
+
+.question-box .avatar .avatar-img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* .question-box .avatar img {
   width: 100%;
   max-width: 100%;
   display: block;
-}
+} */
 
 .question-box .text {
-  margin: 0 20px 30px 20px;
+  padding: 24px 30px 30px 30px;
+  border-top: 2px solid #eee;
 }
 
 .question-box .author span {
   font-family: "Roboto Condensed", sans-serif;
   font-weight: 700;
   text-transform: uppercase;
+}
+
+.question-box .question-text {
+  margin-bottom: 0;
 }
 
 .question-box a.btn {
@@ -69,32 +92,66 @@ h1.answered-toggle {
   }
 }
 
-@media (min-width: 992px) {
+@media (min-width: 768px) {
   .questions {
-    margin: -30px;
+    margin: -20px;
   }
 
   .question-box {
-    width: calc(50% - 64px);
-    margin: 30px;
+    width: calc(100% - 44px);
+    /* margin: 30px; */
+    margin: 20px;
   }
 
   .question-box .content {
     display: flex;
-    margin: 20px 20px 30px 20px;
+    /* margin: 20px; */
   }
 
   .question-box .avatar {
-    width: 150px;
-    margin: 0 15px 0 0;
+    /* width: 16.5%; */
+    /* width: 150px; */
+    /* flex-basis: calc(33.333% - 10px); */
+    /* height: 150px; */
+    /* margin: 0 15px 0 0; */
+    width: 30%;
+    flex-shrink: 0;
+    border-right: 2px solid #eee;
   }
 
   .question-box .text {
-    width: calc(100% - 190px);
-    margin: 0 0 0 15px;
+    /* width: calc(100% - 190px); */
+    /* margin: 0 0 0 30px; */
+    align-self: center;
+    border-top: none;
   }
 
-  .question-box .text p:last-of-type:not(.author) {
+  /* .question-box .text p:last-of-type:not(.author):not(.question-intro) {
     margin-bottom: 0;
+  } */
+
+  /* .quesiton-box .text .question-text {
+    margin-bottom: 0;
+  } */
+}
+
+@media (min-width: 992px) {
+  .question-box .avatar {
+    width: 20%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .questions {
+    margin: -20px;
+  }
+
+  .question-box {
+    width: calc(50% - 44px);
+    margin: 20px;
+  }
+
+  .question-box .avatar {
+    width: 30%;
   }
 }

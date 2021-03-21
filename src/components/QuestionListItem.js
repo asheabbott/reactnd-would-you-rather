@@ -16,11 +16,11 @@ class QuestionListItem extends Component {
       <li key={question.id} className='question-box'>
         <div className='content'>
           <div className='avatar'>
-            <img src={users[question.author].avatarURL} alt=''></img>
+            <div className='avatar-img' style={{backgroundImage: `url(${users[question.author].avatarURL})`}}></div>
           </div>
           <div className='text'>
             <p className='author'><span>{users[question.author].name}</span> asks:</p>
-            <p>Would you rather {question.optionOne.text} or {question.optionTwo.text}?</p>
+            <p className='question-text'>Would you rather {question.optionOne.text} or {question.optionTwo.text}?</p>
           </div>
         </div>
         <Link className='btn' to={`/questions/${question.id}`}>View question</Link>

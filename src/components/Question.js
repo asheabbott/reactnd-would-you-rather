@@ -16,13 +16,13 @@ class Question extends Component {
     answer: 'optionOne',
   }
 
-  handleChange = (event) => {
+  handleChange = event => {
     this.setState({
       answer: event.target.value
     });
   }
 
-  handleSubmit = (event) => {
+  handleSubmit = event => {
     event.preventDefault();
 
     const {authUser} = this.props;
@@ -62,7 +62,7 @@ class Question extends Component {
         <div className='question-box'>
           <div className='content'>
             <div className='avatar'>
-              <img src={users[question.author].avatarURL} alt=''></img>
+              <div className='avatar-img' style={{backgroundImage: `url(${users[question.author].avatarURL})`}}></div>
             </div>
             <div className='text'>
               <p className='author'><span>{users[question.author].name}</span> asks:</p>

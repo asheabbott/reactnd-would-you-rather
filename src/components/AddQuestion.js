@@ -1,15 +1,42 @@
-import React, {Component, Fragment} from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
+import {handleAddQuestion} from '../actions/shared';
 import './AddQuestion.css';
 
 class AddQuestion extends Component {
-  handleSubmit = () => {
+  static propTypes = {
+    authUser: PropTypes.string.isRequired,
+  }
 
+  state = {
+    optionOneText: '',
+    optionTwoText: '',
+    author: this.props.authUser,
+  }
+
+  handleChange = event => {
+    const value = event.target.value;
+    this.setState(state => ({
+      ...state,
+      [event.target.name]: value,
+    }));
+  }
+
+  handleSubmit = event => {
+    event.preventDefault();
+
+    const {optionOneText, optionTwoText, author} = this.state;
+    const {dispatch} = this.props;
+    const question = {optionOneText, optionTwoText, author};
+
+    dispatch(handleAddQuestion(question))
+      .then(() => {
+        this.props.history.push('/');
+      });
   }
 
   render() {
-    const {authUser} = this.props;
-
     return (
       <section className='add-question'>
         <div className='headings'>
@@ -21,14 +48,28 @@ class AddQuestion extends Component {
           <p className='question-intro'>Would you rather</p>
           <form id='questionInput' onSubmit={this.handleSubmit}>
             <div className='option-input'>
-              <input type='text' name='optionOne' placeholder='Option 1' /> or
+              <input 
+                type='text' 
+                name='optionOneText' 
+                placeholder='Option 1'
+                onChange = {this.handleChange} 
+              /> or
             </div>
             <div className='option-input'>
-              <input type='text' name='optionTwo' placeholder='Option 2' /> ?
+              <input 
+                type='text' 
+                name='optionTwoText' 
+                placeholder='Option 2' 
+                onChange = {this.handleChange} 
+              /> ?
             </div>
           </form>
           </div>
-          <button type='submit' form='questionInput'>Submit question</button>
+          <button 
+            type='submit' 
+            form='questionInput'>
+              Submit question
+          </button>
         </div>
       </section>
     );
